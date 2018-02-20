@@ -123,13 +123,30 @@ class HangManController extends Component{
 		}
 	}
 	render(){
+		const classname={border: 'solid'};
 		return (
 		<Row>
           <Col md={12}>
-			<HangManImage hangmanparts={this.state.hangmanparts}/>
-			<HangManWordToGuess word={this.state.word} correctLetters={this.state.correctLetters}/>
-			<HangManGuessedCorrect correctLetters={this.state.correctLetters}/>
-			<HangManGuessedInCorrect incorrectLetters={this.state.incorrectLetters}/>
+			<Row>
+				<Col md={4} className={classname}>
+					<HangManImage hangmanparts={this.state.hangmanparts}/>
+				</Col>
+				<Col md={8}>
+					<Row>
+						<Col md={12} className={classname}>
+							<HangManWordToGuess word={this.state.word} correctLetters={this.state.correctLetters}/>
+						</Col>
+					</Row>
+					<Row>
+						<Col md={6} className={classname}>
+							<HangManGuessedCorrect correctLetters={this.state.correctLetters}/>
+						</Col>
+						<Col md={6} className={classname}>
+							<HangManGuessedInCorrect incorrectLetters={this.state.incorrectLetters}/>
+						</Col>
+					</Row>
+				</Col>
+			</Row>
           </Col>
         </Row>
 		)
