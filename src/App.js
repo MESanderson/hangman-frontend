@@ -123,7 +123,7 @@ class GuessPanel extends Component{
 						<Button bsStyle={'primary'} onClick={this.submitLetter}>Submit Guess</Button>
 					</Col>
 					<Col md={8}>
-						<FormControl onChange={this.setLetterState}/>
+						<FormControl onChange={this.setLetterState} value={this.state.letter}/>
 					</Col>
 				</Row>
 				)
@@ -158,11 +158,13 @@ class HangManController extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			word: 'serendipitous',
+			word: '',
 			correctLetters: [],
-			incorrectLetters: []
+			incorrectLetters: [],
+			myturn: false
 		}
 		this.guess = this.guess.bind(this);
+		this.retrieveState = this.retrieveState.bind(this);
 	}
 	
 	guess(letter){
@@ -176,6 +178,20 @@ class HangManController extends Component{
 			)
 		}
 	}
+	
+	retrieveState(){
+		let state_request = new Request('/api/retrieve_state');
+		fetch(state_request)
+			.then(response => response.json())
+			.then(blob => {
+				this.setState(blob)
+				});
+	}
+	
+	componentDidMount(){
+		this.retrieveState();
+	}
+	
 	
 	render(){
 		const classname={border: 'solid'};
