@@ -98,12 +98,9 @@ class GuessPanel extends Component{
 	}
 	
 	setLetterState(e){
-		let letter = e.target.value;
-		if (letter !== ''){
-			this.setState(
-			{letter: letter}
-			);
-		}
+		let form_letters = e.target.value;
+		let letter = form_letters.length ? form_letters[form_letters.length-1] : form_letters
+		this.setState({letter: letter});
 	}
 	
 	submitLetter(){
